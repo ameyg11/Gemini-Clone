@@ -11,7 +11,7 @@ const ContextProvider = (props) => {
     const [prevPrompts, setPrevPrompts] = useState([]);
     const [showresult, setShowResult] = useState(false);
     const [loading, setLoading] = useState(false);
-    const [resultData, setResultData] =useState("");
+    const [resultData, setResultData] = useState("");
 
     const delayPara = (index,nextword) => {
         setTimeout(function () {
@@ -29,7 +29,8 @@ const ContextProvider = (props) => {
             setShowResult(true)
             setRecentPrompt(prompt)
             const response = await run(prompt);
-            let responseArray = response.split("*");
+            console.log("type of result data",typeof resultData)
+            let responseArray = response.split("**") || response.split("##");
             let newResponse = "";
             for(let i=0; i < responseArray.length; i++){
                 if(i === 0 || i % 2 !== 1){
