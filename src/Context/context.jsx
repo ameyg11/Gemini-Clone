@@ -13,15 +13,18 @@ const ContextProvider = (props) => {
     const [loading, setLoading] = useState(false);
     const [resultData, setResultData] = useState("");
 
-    const delayPara = (index,nextword) => {
-        setTimeout(function () {
-            setResultData(prev => prev+nextword);
-        },75*index)
-
-    }
+    const delayPara = (index, nextword) => {
+        setTimeout(() => {
+          setResultData((prev) => prev + nextword);
+        }, 75 * index);
+      };
+      
+    let sentId = 0;
     
     const onSent = async (prompt) => {
 
+        const currentId = ++sentId;
+        console.log(`[onSent] Called with id: ${currentId} and prompt: ${prompt}`);
         console.log("Type of prompt:", typeof prompt); // Logs the type of prompt
         console.log("Prompt value:", prompt); // Logs the value of prompt
             setResultData("")
@@ -30,17 +33,19 @@ const ContextProvider = (props) => {
             setRecentPrompt(prompt)
             const response = await run(prompt);
             console.log("type of result data",typeof resultData)
-            let responseArray = response.split("**") || response.split("##");
+            let responseArray = response.split("**");
+            console.log(responseArray);
             let newResponse = "";
             for(let i=0; i < responseArray.length; i++){
                 if(i === 0 || i % 2 !== 1){
                     newResponse += responseArray[i];
                 }
                 else{
-                    newResponse += "<b>"+ responseArray[i] + "</b>" ;
+                    newResponse +=  "<b>" + responseArray[i] + "</b>";
                 }
             }
-            let newResponse2 = newResponse.split("*").join("</br>");
+            let newResponseWithLineBreak =  newResponse.split("##").join("</br>");
+            let newResponse2 = newResponseWithLineBreak.split("*").join("</br>");
             setResultData(newResponse2)
             let newResponseArray = newResponse2.split(" ");
             for (let i=0; i< newResponseArray.length; i++){
@@ -51,10 +56,8 @@ const ContextProvider = (props) => {
             setInput(" ")
     };
 
-    // useEffect(() => {
-    //     onSent("What is React JS");
-    // }, []); // Empty dependency array ensures this runs once on mount
 
+    
     const contextValue = {
         // Define any context values or functions here
         prevPrompts,

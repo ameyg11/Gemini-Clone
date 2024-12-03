@@ -8,8 +8,8 @@ const Main = () => {
     const {prevPrompts,setPrevPrompts,onSent,recentPrompt,setRecentPrompt,showresult,loading,resultData,input,setInput} = useContext(Context)
 
     const handleCardClick = (text) =>{
-      setInput(text);
       console.log("text entered", text);
+      setInput(text);
       onSent(text);
     }
 
@@ -75,7 +75,6 @@ const Main = () => {
         </div>
         }
 
-        
         <div className="main-bottom">
           <div className="search-box">
             <input onChange={(e) =>setInput(e.target.value)} value={input} type="text" placeholder="Enter a prompt here" />
