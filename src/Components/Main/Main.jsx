@@ -9,7 +9,7 @@ const Main = () => {
 
     const handleCardClick = (text) =>{
       console.log("text entered", text);
-      setInput(text);
+      setInput(text); 
       onSent(text);
     }
 
@@ -63,7 +63,7 @@ const Main = () => {
             </div>
             <div className="result-data">
               <img src={assets.gemini_icon} alt="" />
-              {loading
+              {loading 
               ?<div className="loader">
                 <hr />
                 <hr />

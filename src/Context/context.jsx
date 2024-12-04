@@ -19,14 +19,16 @@ const ContextProvider = (props) => {
         }, 75 * index);
       };
       
+      
     let sentId = 0;
-    
+
     const onSent = async (prompt) => {
 
         const currentId = ++sentId;
         console.log(`[onSent] Called with id: ${currentId} and prompt: ${prompt}`);
         console.log("Type of prompt:", typeof prompt); // Logs the type of prompt
         console.log("Prompt value:", prompt); // Logs the value of prompt
+        
             setResultData("")
             setLoading(true)
             setShowResult(true)
